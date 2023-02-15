@@ -26,3 +26,7 @@ def get_mostrar(nombre):
 @app.route("/redirect")
 def get_redirect():
     return redirect(url_for('home'))
+
+@app.errorhandler(404)
+def error_handler(error):
+    return render_template('404.html', error=error)
