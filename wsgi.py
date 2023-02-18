@@ -30,3 +30,16 @@ def get_redirect():
 @app.errorhandler(404)
 def error_handler(error):
     return render_template('404.html', error=error)
+
+@app.route('/signin/<usuario>/<password>')
+def sign_in(usuario, password):
+    db_user='Lucas'
+    db_pass='123456'
+    if usuario==db_user and password==db_pass:
+        return f'Exitoso User: {usuario}'
+    return render_template('404.html',error=f'Fallo User -> {usuario}')
+
+@app.route('/personas')
+def get_personas():
+    personas=['lucas', 'debora', 'agustin']
+    return render_template('mostrar_personas.html', personas=personas)
