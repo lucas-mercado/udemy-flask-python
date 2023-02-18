@@ -3,13 +3,14 @@ from flask import (
     render_template,
     redirect,
     url_for,
+    request
 )
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "<h6>Home</h6>"
+    return render_template('bienvenido.html')
 
 @app.route("/saludo/<nombre>")
 def saludo(nombre):
@@ -51,3 +52,14 @@ def perfil():
 @app.route('/blog')
 def blog():
     return render_template('blog.html')
+
+@app.route('/formulario')
+def formulario():
+    return render_template('formulario.html')
+
+@app.route('/bienvenido')
+def bienvenido():
+    return render_template('bienvenido.html',datos=request.args.to_dict())
+
+
+
