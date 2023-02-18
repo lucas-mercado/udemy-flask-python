@@ -43,3 +43,11 @@ def sign_in(usuario, password):
 def get_personas():
     personas=['lucas', 'debora', 'agustin']
     return render_template('mostrar_personas.html', personas=personas)
+
+@app.route('/perfil')
+def perfil():
+    return render_template('perfil.html')
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
