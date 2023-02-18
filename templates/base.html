@@ -8,8 +8,8 @@
 </head>
 <body>
     <ol>
-        <li><a href="/perfil">perfil</a></li>
-        <li><a href="/blog">blog</a></li>
+        <li><a href="{{url_for('perfil')}}">perfil</a></li>
+        <li><a href="{{url_for('blog')}}">blog</a></li>
     </ol>
     {% block content%}
     {% endblock%}
