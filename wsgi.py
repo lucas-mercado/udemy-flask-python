@@ -5,8 +5,11 @@ from flask import (
     url_for,
     request
 )
+import os
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY']=os.getenv('SECRET_KEY', 'HOLA')
 
 @app.route("/")
 def home():
@@ -60,6 +63,24 @@ def formulario():
 @app.route('/bienvenido')
 def bienvenido():
     return render_template('bienvenido.html',datos=request.args.to_dict())
+
+@app.route('/inicio', methods=['GET', 'POST'])
+def inicio():
+    from formulario.formulario import (
+        Formulario
+    )
+    
+    datos = {
+        "nombre" : '',
+        "estado" : False,
+        "formulario" : Formulario()
+    }
+
+    if datos['formulario'].validate_on_submit():
+        datos['nombre'] = datos['formulario'].nombre.data
+        datos['estado'] = True
+        datos['formulario'].nombre.data = ''
+    return render_template('inicio.html', datos=datos)
 
 
 
