@@ -11,6 +11,11 @@ from wtforms import (
 from wtforms.validators import (
     DataRequired
 )
+
+class FormularioBoton(FlaskForm):
+    mensaje=StringField('mensaje')
+    boton=SubmitField('Generar mensaje')
+
 class Formulario(FlaskForm):
     nombre=StringField('nombre', validators=[DataRequired()])
     edad=BooleanField('Eres mayor de edad')

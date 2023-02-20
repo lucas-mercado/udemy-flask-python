@@ -4,7 +4,8 @@ from flask import (
     redirect,
     url_for,
     request,
-    session
+    session,
+    flash
 )
 import os
 
@@ -104,6 +105,18 @@ def datos_personales():
         session['boton']=mi_formulario.boton.data
         return redirect(url_for('informacion'))
     return render_template('datospersonales.html',formulario=mi_formulario)
+
+@app.route('/generadormensaje/', methods=['GET', 'POST'])
+def generador_mensaje():
+    from formulario.formulario import (
+        FormularioBoton
+    )
+    mi_formulario=FormularioBoton()
+    if mi_formulario.validate_on_submit():
+        mensaje=mi_formulario.mensaje.data
+        flash(mensaje)
+        return redirect(url_for('generador_mensaje'))
+    return render_template('alert.html',formulario=mi_formulario)
 
 
 
