@@ -13,10 +13,23 @@ from wtforms.validators import (
 )
 
 class FormularioBoton(FlaskForm):
+    '''
+        Form:
+            mensaje: String
+            boton: Submit
+    '''
     mensaje=StringField('mensaje')
     boton=SubmitField('Generar mensaje')
 
 class Formulario(FlaskForm):
+    '''
+        Form:
+            nombre: String
+            edad: Bool
+            sexo: Radio
+            comentario: String
+            boton: Submit
+    '''
     nombre=StringField('nombre', validators=[DataRequired()])
     edad=BooleanField('Eres mayor de edad')
     sexo=RadioField('sexo: ', choices=[('H', 'Hombre'),('M', 'Mujer')])
