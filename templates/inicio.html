@@ -1,4 +1,4 @@
-{% if datos.estado %}
+{% if datos.boton %}
 <p>Hola {{datos.nombre}}</p>
 {% else %}
 <p>Usted no esta registrado!!!</p>
@@ -7,5 +7,5 @@
 <form action="" method="post">
     {{datos.formulario.hidden_tag()}}
     {{datos.formulario.nombre.label}}{{datos.formulario.nombre}}
-    {{datos.formulario.estado}}
+    {{datos.formulario.boton}}
 </form>

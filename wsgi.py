@@ -3,7 +3,8 @@ from flask import (
     render_template,
     redirect,
     url_for,
-    request
+    request,
+    session
 )
 import os
 
@@ -72,15 +73,37 @@ def inicio():
     
     datos = {
         "nombre" : '',
-        "estado" : False,
+        "boton" : False,
         "formulario" : Formulario()
     }
 
     if datos['formulario'].validate_on_submit():
         datos['nombre'] = datos['formulario'].nombre.data
-        datos['estado'] = True
+        datos['boton'] = True
         datos['formulario'].nombre.data = ''
     return render_template('inicio.html', datos=datos)
+
+
+@app.route('/informacion')
+def informacion():
+    return render_template('informacion.html')
+
+@app.route('/datospersonales', methods=['GET', 'POST'])
+def datos_personales():
+    from formulario.formulario import (
+        Formulario
+    )
+    
+    mi_formulario=Formulario()
+
+    if mi_formulario.validate_on_submit():
+        session['nombre']=mi_formulario.nombre.data
+        session['edad']=mi_formulario.edad.data
+        session['sexo']=mi_formulario.sexo.data
+        session['comentario']=mi_formulario.comentario.data
+        session['boton']=mi_formulario.boton.data
+        return redirect(url_for('informacion'))
+    return render_template('datospersonales.html',formulario=mi_formulario)
 
 
 

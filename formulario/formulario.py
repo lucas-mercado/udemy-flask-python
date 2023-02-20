@@ -3,8 +3,17 @@ from flask_wtf import (
 )
 from wtforms import (
     StringField,
-    SubmitField
+    SubmitField,
+    BooleanField,
+    TextAreaField,
+    RadioField
+)
+from wtforms.validators import (
+    DataRequired
 )
 class Formulario(FlaskForm):
-    nombre=StringField('nombre')
-    estado=SubmitField('estado')
+    nombre=StringField('nombre', validators=[DataRequired()])
+    edad=BooleanField('Eres mayor de edad')
+    sexo=RadioField('sexo: ', choices=[('H', 'Hombre'),('M', 'Mujer')])
+    comentario=TextAreaField()
+    boton=SubmitField('Enviar')
