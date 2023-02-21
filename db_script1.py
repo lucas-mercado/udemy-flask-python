@@ -17,12 +17,12 @@ from models.models import (
 app.app_context().push()
 db.create_all()
 
-persona1=Persona('Pedro', 25)
-persona2=Persona('Maria', 35)
+persona1=Persona('Pedro', 25, "Mexico")
+persona2=Persona('Maria', 35, "Peru")
 db.session.add_all([persona1, persona2])
 db.session.commit()
 
-persona3=Persona('Teresa', 24)
+persona3=Persona('Teresa', 24, "Brasil")
 db.session.add(persona3)
 db.session.commit()
 

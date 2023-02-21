@@ -1,0 +1,2 @@
+https://inloop.github.io/sqlite-viewer/
+https://sqlitebrowser.org/dl/

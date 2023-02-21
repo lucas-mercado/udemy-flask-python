@@ -7,6 +7,9 @@ from routes import (
 from flask_sqlalchemy import (
     SQLAlchemy
 )
+from flask_migrate import (
+    Migrate
+)
 import os
 
 directorio=os.path.abspath(os.path.dirname(__file__))
@@ -18,6 +21,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
 #base de datos
 db=SQLAlchemy(app)
-
+Migrate(app, db)
 #routes
 routes(app=app)
