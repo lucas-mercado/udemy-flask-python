@@ -9,6 +9,8 @@ example:
 from wsgi import (
     app,
     db,
+)
+from models.models import (
     Persona
 )
 
