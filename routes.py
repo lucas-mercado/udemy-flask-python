@@ -1,4 +1,4 @@
-def routes(app):
+def routes(app, db):
     from flask import (
         render_template,
         redirect,
@@ -112,3 +112,49 @@ def routes(app):
             flash(mensaje)
             return redirect(url_for('generador_mensaje'))
         return render_template('alert.html',formulario=mi_formulario)
+    
+    
+    @app.route('/inicio-mascota/')
+    def inicio_mascota():
+        return render_template('inicio_mascota.html')
+    
+    @app.route('/agregar/', methods=['GET', 'POST'])
+    def agregar():
+        from formulario.mascota import(
+            FormularioAlta
+        )
+        from models.models import (
+            Mascota
+        )
+        formulario=FormularioAlta()
+        if formulario.validate_on_submit():
+            mascota_nombre=formulario.nombre.data
+            db.session.add(Mascota(mascota_nombre))
+            db.session.commit()
+            return redirect(url_for('listar'))
+        return render_template('mascota_alta.html', formulario=formulario)
+    
+    @app.route('/delete/', methods=['GET', 'DELETE'])
+    def delete():
+        from formulario.mascota import(
+            FormularioBaja
+        )
+        from models.models import (
+            Mascota
+        )
+        formulario=FormularioBaja()
+        if formulario.validate_on_submit():
+            mascota_id=formulario.id.data
+            mascota=db.session.get(Mascota, mascota_id)
+            db.session.delete(mascota)
+            db.session.commit()
+            return redirect(url_for('listar'))
+        return render_template('mascota_baja.html', formulario=formulario)
+    
+    @app.route('/listar/')
+    def listar():
+        from models.models import(
+            Mascota
+        )
+        mascotas=Mascota.query.all()
+        return render_template('listar_mascota.html', mascotas=mascotas)

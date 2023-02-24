@@ -23,8 +23,8 @@ class Mascota(db.Model):
 
     id=db.Column(db.Integer, primary_key=True)
     nombre=db.Column(db.Text)
-    juguetes=db.relationship('juguete', backref='mascota', userList=False)
-    propietario=db.relationship('propietario', backref='mascota', userList=False)
+    juguetes=db.relationship('Juguete', backref='mascota', uselist=False)
+    propietario=db.relationship('Propietario', backref='mascota', uselist=False)
 
     def __init__(self, nombre):
         self.nombre=nombre
@@ -35,7 +35,7 @@ class Mascota(db.Model):
     def mostrar_juguetes(self):
         for juguete in self.juguetes:
             print(juguete.nombre)
-
+         
 class Juguete(db.Model):
     __tablename__='Juguetes'
 
@@ -63,5 +63,3 @@ class Propietario(db.Model):
 
     def __repr__(self):
         return f'Mascota: {self.nombre}'
-
-         

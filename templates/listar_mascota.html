@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% include 'inicio_mascota.html' %}
+{% block content %}
+    <ul>
+        {% for mascota in mascotas %}
+        <li>{{mascota}}</li>
+        {% endfor %}
+    </ul>
+{% endblock%}
