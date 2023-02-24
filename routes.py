@@ -134,7 +134,7 @@ def routes(app, db):
             return redirect(url_for('listar'))
         return render_template('mascota_alta.html', formulario=formulario)
     
-    @app.route('/delete/', methods=['GET', 'DELETE'])
+    @app.route('/delete/', methods=['GET', 'POST'])
     def delete():
         from formulario.mascota import(
             FormularioBaja

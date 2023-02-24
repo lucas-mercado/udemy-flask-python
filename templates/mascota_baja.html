@@ -2,6 +2,7 @@
 {% include 'inicio_mascota.html' %}
 {% block content %}
 <form action="" method="post">
+    {{ formulario.hidden_tag() }}
     {{formulario.id.label}} {{formulario.id}}
     {{formulario.boton}}
 </form>
