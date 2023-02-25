@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% include 'inicio_mascota.html' %}
+
+{% block content %}
+    <p>{{mensaje}}</p>
+    <form action="" method="post">
+        {{formulario.hidden_tag()}}
+        {{formulario.logout}}
+    </form>
+{% endblock %}

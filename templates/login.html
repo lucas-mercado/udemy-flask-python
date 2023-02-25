@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{% include 'inicio_mascota.html'%}
+
+{% block content %}
+    <form action="" method="post">
+        {{ formulario.hidden_tag() }}
+        {{formulario.username.label}} {{formulario.username}}
+        {{formulario.password.label}} {{formulario.password}}
+        {{formulario.boton}}
+    </form>
+{% endblock %}

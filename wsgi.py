@@ -18,6 +18,7 @@ app=Flask(__name__)
 app.config['SECRET_KEY']=os.getenv('SECRET_KEY', 'HOLA')
 app.config['SQLALCHEMY_DATABASE_URI']= f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+app.secret_key=os.getenv('SECRET_KEY', 'HOLA')
 
 #base de datos
 db=SQLAlchemy(app)

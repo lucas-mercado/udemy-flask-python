@@ -8,7 +8,7 @@ def routes(app, db):
         flash
     )
     
-    @app.route("/")
+    @app.route("/home")
     def home():
         return render_template('bienvenido.html')
 
@@ -158,3 +158,37 @@ def routes(app, db):
         )
         mascotas=Mascota.query.all()
         return render_template('listar_mascota.html', mascotas=mascotas)
+    
+    #----------------------------------------------------------------------------
+    @app.route('/')
+    def index():
+        if 'username' and 'password' in session:
+            return redirect(url_for('login_out'))
+        return redirect(url_for('login'))
+    
+    @app.route('/login',methods=['POST', 'GET'])
+    def login():
+        from formulario.login import (
+            Login
+        )
+        formulario=Login()
+        if formulario.validate_on_submit():
+            session['username']=formulario.username.data
+            session['password']=formulario.password.data
+            return redirect(url_for('index'))
+        return render_template('login.html', formulario=formulario)
+    
+    @app.route('/logout',methods=['POST', 'GET'])
+    def login_out():
+        from formulario.login import (
+            LogOut
+        )
+        formulario=LogOut()
+        if 'username' in session:
+            mensaje=f"Autenticado: {session['username']}"
+        if formulario.validate_on_submit():
+            session.pop('username')
+            session.pop('password')
+            return redirect(url_for('index'))
+        return render_template('logout.html', formulario=formulario, mensaje=mensaje)
+    
