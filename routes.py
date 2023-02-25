@@ -184,7 +184,7 @@ def routes(app, db):
             LogOut
         )
         formulario=LogOut()
-        if 'username' in session:
+        if 'username' and 'password' in session:
             mensaje=f"Autenticado: {session['username']}"
         if formulario.validate_on_submit():
             session.pop('username')
